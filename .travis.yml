@@ -10,9 +10,11 @@ env:
 matrix:
   include:
    - os: linux
-     env: MBED-CLOUD=1.5.0
+     env: MBED-CLOUD=1.5.0 ARMGCC_VERSION=6.3.1
    - os: linux
-     env: MBED-CLOUD=2.0.1.1
+     env: MBED-CLOUD=2.0.1.1 ARMGCC_VERSION=6.3.1
+   - os: linux
+     env: MBED-CLOUD=2.0.1.1 ARMGCC_VERSION=7.3.1
 
 before_install:
   - pip install -U pip wheel
@@ -21,4 +23,9 @@ before_install:
   - mbed-ci/travis_beforeinstall.sh
 
 script:
-  - ./mbed-cloud-build.sh builddir ${MBED-CLOUD}
+  - ./mbed-cloud-build.sh && cloudbuild builddir ${MBED-CLOUD}
+
+cache:
+  directories:
+    - ${TC_HOME}
+    - ${HOME}/.mbed/mbed-cache

@@ -1,4 +1,4 @@
-funbuild() {
+cloudbuild() {
   git clone https://github.com/iconservo/mbed-cloud-client-example $1
 
   cd $1
@@ -28,7 +28,7 @@ funbuild() {
 }
 
 fullbuild() {
-export MBED_BUILD_TIMESTAMP=42
-cloudbuild cloud-1.5 1.5.0
-cloudbuild cloud-2.0 2.0.1.1
+  export MBED_BUILD_TIMESTAMP=42
+  cloudbuild cloud-1.5 1.5.0
+  cloudbuild cloud-2.0 2.0.1.1
 }
