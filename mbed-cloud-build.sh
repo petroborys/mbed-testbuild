@@ -22,16 +22,12 @@ cloudbuild() {
   echo making dir BUILD
   mkdir -p BUILD
 
-  echo "wut"   > BUILD/mbed_config.h
-  echo "test"  > BUILD/build_log_test.log
-  echo "123"   > BUILD/cloud_client-1.2.bin
-
   # compile possible configs
-  # mbed compile -t GCC_ARM -m K64F | tee BUILD/build_log_K64F.log
-  # mbed compile -t GCC_ARM -m K64F --app-config configs/wifi_esp8266_v4.json --build BUILD/K64F-WIFI | tee BUILD/build_log_K64F-WIFI.log
-  # mbed compile -t GCC_ARM -m NUCLEO_F411RE --app-config configs/wifi_f411re_v4.json | tee BUILD/build_log_NUCLEO_F411RE.log
-  # mbed compile -t GCC_ARM -m UBLOX_EVK_ODIN_W2 | tee build_log_UBLOX_EVK_ODIN_W2.log | tee BUILD/build_log_UBLOX_EVK_ODIN_W2.log
-  echo find BUILD -type f -not \( -name "${1}*" -or -name mbed_config.h -or -name "build_log*.log" \) -delete
+  mbed compile -t GCC_ARM -m K64F | tee BUILD/build_log_K64F.log
+  mbed compile -t GCC_ARM -m K64F --app-config configs/wifi_esp8266_v4.json --build BUILD/K64F-WIFI | tee BUILD/build_log_K64F-WIFI.log
+  mbed compile -t GCC_ARM -m NUCLEO_F411RE --app-config configs/wifi_f411re_v4.json | tee BUILD/build_log_NUCLEO_F411RE.log
+  mbed compile -t GCC_ARM -m UBLOX_EVK_ODIN_W2 | tee build_log_UBLOX_EVK_ODIN_W2.log | tee BUILD/build_log_UBLOX_EVK_ODIN_W2.log
+
   find BUILD -type f -not \( -name "${1}*" -or -name mbed_config.h -or -name "build_log*.log" \) -delete
   find BUILD -type d -empty -delete
   cd ..
