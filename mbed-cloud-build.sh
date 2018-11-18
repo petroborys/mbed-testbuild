@@ -5,6 +5,8 @@ cloudbuild() {
   git checkout $2
   mbed deploy
 
+  [ -z "$CI" ] && mbed config GCC_ARM_PATH $HOME/bin
+
   # patch for faster builds
   cd mbed-os
   for patch in ../../patches/*.patch ; do
