@@ -23,7 +23,7 @@ before_install:
   - mbed-ci/travis_beforeinstall.sh
 
 script:
-  - ./mbed-cloud-build.sh && cloudbuild builddir ${MBED-CLOUD}
+  - . ./mbed-cloud-build.sh && cloudbuild builddir ${MBED-CLOUD}
 
 cache:
   directories:
