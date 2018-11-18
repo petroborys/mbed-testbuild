@@ -28,7 +28,7 @@ cache:
 before_deploy:
   - printenv
   - find cloud_client/BUILD/
-  - zip -r ${BUILD_DIR}/BUILD/mbed-${MBED_CLOUD}-armgcc-${ARMGCC_VERSION}.zip cloud-1.5/BUILD/*
+  - zip -r ${BUILD_DIR}/BUILD/mbed-${MBED_CLOUD}-armgcc-${ARMGCC_VERSION}.zip ${BUILD_DIR}/BUILD/*
   - find ${BUILD_DIR}/BUILD -type f -mindepth 2 -delete
   - find ${BUILD_DIR}/BUILD -type d -empty -delete
 deploy:
