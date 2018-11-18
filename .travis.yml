@@ -20,12 +20,10 @@ before_install:
   - pip install -U pip wheel
   - pip install mbed-cli
   - mbed deploy
-  - find . -type d
   - ./toolchain_install.sh
 
 script:
-  - find . -type d
-  - . ./mbed-cloud-build.sh && cloudbuild builddir ${MBED_CLOUD}
+  - . ./mbed-cloud-build.sh && cloudbuild cloud_client ${MBED_CLOUD}
 
 cache:
   directories:

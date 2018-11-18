@@ -17,14 +17,15 @@ cloudbuild() {
 
   # copy credentials
   cp ../mbed_cloud_dev_credentials.c .
+  mkdir -p BUILD
 
   # compile possible configs
-  mbed compile -t GCC_ARM -m K64F | tee BUILD/K64F/build_log.log
-  mbed compile -t GCC_ARM -m K64F --app-config configs/wifi_esp8266_v4.json --build BUILD/K64F-WIFI | tee BUILD/K64F-WIFI/build_log.log
-  mbed compile -t GCC_ARM -m NUCLEO_F411RE --app-config configs/wifi_f411re_v4.json | tee BUILD/NUCLEO_F411RE/build_log.logg
-  mbed compile -t GCC_ARM -m UBLOX_EVK_ODIN_W2 | tee build_log_UBLOX_EVK_ODIN_W2.log | tee BUILD/UBLOX_EVK_ODIN_W2/build_log.log
+  mbed compile -t GCC_ARM -m K64F | tee BUILD/build_log_K64F.log
+  mbed compile -t GCC_ARM -m K64F --app-config configs/wifi_esp8266_v4.json --build BUILD/K64F-WIFI | tee BUILD/build_log_K64F-WIFI.log
+  mbed compile -t GCC_ARM -m NUCLEO_F411RE --app-config configs/wifi_f411re_v4.json | tee BUILD/build_log_NUCLEO_F411RE.log
+  mbed compile -t GCC_ARM -m UBLOX_EVK_ODIN_W2 | tee build_log_UBLOX_EVK_ODIN_W2.log | tee BUILD/build_log_UBLOX_EVK_ODIN_W2.log
 
-  find BUILD -type f -not \( -name "$1*" -or -name mbed_config.h -or name "build_log.log" \) -delete
+  find BUILD -type f -not \( -name "$1*" -or -name mbed_config.h -or name "build_log*.log" \) -delete
   find BUILD -type d -empty -delete
   cd ..
 }
