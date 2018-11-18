@@ -24,6 +24,8 @@ cloudbuild() {
 
   touch BUILD/file1.txt
   touch BUILD/file2.txt
+  touch BUILD/mbed_config.h
+  touch BUILD/build_log_test.log
 
   # compile possible configs
   # mbed compile -t GCC_ARM -m K64F | tee BUILD/build_log_K64F.log
