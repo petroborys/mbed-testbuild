@@ -29,3 +29,12 @@ cache:
   directories:
     - ${TC_HOME}
     - ${HOME}/.mbed/mbed-cache
+
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+  file:
+    - cloudbuild/BUILD
+  on:
+    all_branches: true
