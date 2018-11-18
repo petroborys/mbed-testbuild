@@ -28,7 +28,7 @@ deploy:
   provider: releases
   skip_cleanup: true
   file_glob: true
-  file: cloudbuild/BUILD/*
+  file: cloudbuild/BUILD/**/*
   api_key: ${GITHUB_TOKEN}
   on:
     all_branches: true
