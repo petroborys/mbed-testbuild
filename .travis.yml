@@ -31,7 +31,7 @@ deploy:
   provider: releases
   skip_cleanup: true
   file_glob: true
-  file: cloud_client/BUILD/build_log_test.log
+  file: cloud_client/BUILD/**/*
   api_key: ${GITHUB_TOKEN}
   on:
     all_branches: true
