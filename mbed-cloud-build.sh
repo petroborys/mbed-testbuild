@@ -22,11 +22,9 @@ cloudbuild() {
   echo making dir BUILD
   mkdir -p BUILD
 
-  touch BUILD/file1.txt
-  touch BUILD/file2.txt
-  echo "wut" > touch BUILD/mbed_config.h
-  echo "test" >  BUILD/build_log_test.log
-  echo "123" > BUILD/cloud_client-1.2.bin
+  echo "wut"   > BUILD/mbed_config.h
+  echo "test"  > BUILD/build_log_test.log
+  echo "123"   > BUILD/cloud_client-1.2.bin
 
   # compile possible configs
   # mbed compile -t GCC_ARM -m K64F | tee BUILD/build_log_K64F.log
