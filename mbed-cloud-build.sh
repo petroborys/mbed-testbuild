@@ -1,3 +1,5 @@
+#!/bin/bash -x
+
 cloudbuild() {
   git clone https://github.com/iconservo/mbed-cloud-client-example $1
 
@@ -17,6 +19,7 @@ cloudbuild() {
 
   # copy credentials
   cp ../mbed_cloud_dev_credentials.c .
+  echo making dir BUILD
   mkdir -p BUILD
 
   touch BUILD/file1.txt
