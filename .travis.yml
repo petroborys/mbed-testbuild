@@ -24,12 +24,16 @@ cache:
   directories:
   - "${TC_HOME}"
   - "${HOME}/.mbed/mbed-cache"
+before_deploy:
+  - printenv
+  - find cloud_client/BUILD/
 deploy:
   provider: releases
   skip_cleanup: true
   file_glob: true
-  file: cloud_client/BUILD/**/*
+  file: cloud_client/BUILD/file1.txt
   api_key: ${GITHUB_TOKEN}
   on:
     all_branches: true
+    tags: false
     condition: $TRAVIS_PULL_REQUEST == "false"
