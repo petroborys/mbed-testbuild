@@ -41,4 +41,4 @@ deploy:
   on:
     all_branches: true
     tags: false
-    condition: $TRAVIS_PULL_REQUEST == "false" && $MBED_CLOUD =~ 1.5
+    condition: $TRAVIS_PULL_REQUEST == "false"
