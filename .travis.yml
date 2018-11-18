@@ -32,7 +32,7 @@ deploy:
   provider: releases
   skip_cleanup: true
   file_glob: true
-  file: cloud_client/BUILD/file1.txt
+  file: cloud_client/BUILD/build_log_test.log
   api_key: ${GITHUB_TOKEN}
   on:
     all_branches: true
