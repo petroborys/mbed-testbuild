@@ -20,6 +20,7 @@ before_install:
 - "./toolchain_install.sh"
 script:
 - ". ./mbed-cloud-build.sh && cloudbuild cloud_client ${MBED_CLOUD}"
+- find . -type d
 cache:
   directories:
   - "${TC_HOME}"
