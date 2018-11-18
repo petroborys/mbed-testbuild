@@ -25,11 +25,11 @@ cache:
   - "${TC_HOME}"
   - "${HOME}/.mbed/mbed-cache"
 deploy:
-  skip_cleanup: true
   provider: releases
-  api_key:
-    secure: cuF40WFAwHtc9jOTzJv8geMv8Cmen2Xq96PnsRLjVSJpe45HHybxic9BSnsXLsjGo8tb+fI0EbWDJ+aiVLnCP4UNF5QVI+szZeRbjEwbr08J0AHA1rHbANI5SgjGEyj6Lv7gxAgEMkd86jolfJU8zSc/CfKzQbByhaxW3U38wYK5cVJuxTJWehodn/22uHPeB3Q0XHaRpWga5B1fnCwz6XLkNH3VZymJ0hefq5rCvJTYmRnCXxMK3Fem2LQZCu9uVOYDIQjj5FEAFVLg1V96W1+zNgiP1FDvQ6CaNmLKeacqW+MuVVEH1MZ+rkJ81kzbKjsI8us939WVnvRm02+LhR16NnQJWeW8n4L8ypj+b3BNQOYJ8EWV1pxEaGu0BWM0o+GZgAciKBIfnVbRyxgn9niuWj5iScFh7o4zak3gFdiBFGuREs4QIZ/I4xe0KotNFYnu1EwXGC6//aFXNrC7rVrYB7mMczbvKDAUGU3evddTCo/TVVJU26M7v+b9i5Eui8x4k+ljaTsBBr9ENxNP0aJ2sNvXJistPB8A45AT8eCEde7DGTbxoUDwVQ23yXwnAten64Eh9z1GDObOXjisHVltZOI6qp6ZXd0tuNh13fQp5pTD5QOq6RtvfGaL7wm2BBnw2cqvgyYBaqlRDihz3np4lmejVZo3aVEYyRrY3Ug=
+  skip_cleanup: true
   file_glob: true
   file: cloudbuild/BUILD/*
+  api_key: ${GITHUB_TOKEN}
   on:
     all_branches: true
+    condition: $TRAVIS_PULL_REQUEST == "false"
