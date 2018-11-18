@@ -1,0 +1,24 @@
+language: python
+python:
+  - "3.6"
+
+env:
+  global:
+    - TC_HOME=$HOME/tc
+    - MBED_BUILD_TIMESTAMP=42
+
+matrix:
+  include:
+   - os: linux
+     env: MBED-CLOUD=1.5.0
+   - os: linux
+     env: MBED-CLOUD=2.0.1.1
+
+before_install:
+  - pip install -U pip wheel
+  - pip install mbed-cli
+  - mbed deploy
+  - mbed-ci/travis_beforeinstall.sh
+
+script:
+  - ./mbed-cloud-build.sh builddir ${MBED-CLOUD}

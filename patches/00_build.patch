@@ -1,0 +1,48 @@
+commit 8d63ef6060332dc124d1ddea0ec40fe1d4e64d3c
+Author: Jimmy Brisson <theotherjimmy@gmail.com>
+Date:   Thu Oct 4 11:56:18 2018 -0500
+
+    Tools: Fix Python3 + firmware header traeback
+    
+    ### Description
+    
+    Traceback:
+    ```
+    Merging Regions
+      Filling region bootloader with mbed-cloud-client-example/mbed-os/features/FEATURE_BOOTLOADER/targets/TARGET_Freescale/TARGET_MCUXpresso_MCUS/TARGET_MCU_K64F/TARGET_FRDM/mbed-bootloader-k64f-block_device-sotp-v3_4_0.bin
+      Padding region bootloader with 0x9a4 bytes
+    Traceback (most recent call last):
+      File "mbed-cloud-client-example/mbed-os/tools/make.py", line 293, in <module>
+        ignore=options.ignore
+      File "mbed-cloud-client-example/mbed-os/tools/build_api.py", line 548, in build_project
+        merge_region_list(region_list, res, notify)
+      File "mbed-cloud-client-example/mbed-os/tools/build_api.py", line 423, in merge_region_list
+        _fill_header(region_list, region).tofile(header_filename, format='hex')
+      File "mbed-cloud-client-example/mbed-os/tools/build_api.py", line 380, in _fill_header
+        header.puts(start, struct.pack(fmt, time()))
+    struct.error: required argument is not an integer
+    ```
+    
+    reason: `time()` returns a float. So the fix is to force it to be an `int`.
+    
+    ### Pull request type
+    
+        [x] Fix
+        [ ] Refactor
+        [ ] Target update
+        [ ] Functionality change
+        [ ] Breaking change
+
+diff --git a/tools/build_api.py b/tools/build_api.py
+index 0f25ffa77..efadf9a4a 100644
+--- a/tools/build_api.py
++++ b/tools/build_api.py
+@@ -377,7 +377,7 @@ def _fill_header(region_list, current_region):
+         elif type == "timestamp":
+             fmt = {"32le": "<L", "64le": "<Q",
+                    "32be": ">L", "64be": ">Q"}[subtype]
+-            header.puts(start, struct.pack(fmt, time()))
++            header.puts(start, struct.pack(fmt, int(time())))
+         elif type == "size":
+             fmt = {"32le": "<L", "64le": "<Q",
+                    "32be": ">L", "64be": ">Q"}[subtype]

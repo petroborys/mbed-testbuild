@@ -1,0 +1,28 @@
+commit 77f9fb9039a6152b318dc6f4028cd13ad139cf99
+Author: kert <kaidokert@gmail.com>
+Date:   Wed Oct 10 01:28:19 2018 -0700
+
+    Allow overriding build timestamp from env
+
+diff --git a/tools/toolchains/__init__.py b/tools/toolchains/__init__.py
+index f22250e3e..0953fa9d3 100644
+--- a/tools/toolchains/__init__.py
++++ b/tools/toolchains/__init__.py
+@@ -19,7 +19,7 @@ from __future__ import print_function, division, absolute_import
+ import re
+ import sys
+ import json
+-from os import stat, walk, getcwd, sep, remove
++from os import stat, walk, getcwd, sep, remove, getenv
+ from copy import copy
+ from time import time, sleep
+ from shutil import copyfile
+@@ -126,7 +126,7 @@ class mbedToolchain:
+ 
+         # Build output dir
+         self.build_dir = abspath(build_dir) if PRINT_COMPILER_OUTPUT_AS_LINK else build_dir
+-        self.timestamp = time()
++        self.timestamp = getenv("MBED_BUILD_TIMESTAMP",time())
+ 
+         # Number of concurrent build jobs. 0 means auto (based on host system cores)
+         self.jobs = 0

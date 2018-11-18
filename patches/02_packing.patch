@@ -1,0 +1,19 @@
+commit 6815409fe798ab8432e98b930e621667948797bc
+Author: kert <kaidokert@gmail.com>
+Date:   Sat Nov 17 17:57:46 2018 -0800
+
+    Fix unsigned packing bug in merge_regions #8544
+
+diff --git a/tools/build_api.py b/tools/build_api.py
+index 28c6007e1..56e1af37a 100644
+--- a/tools/build_api.py
++++ b/tools/build_api.py
+@@ -388,7 +388,7 @@ def _fill_header(region_list, current_region):
+             else:
+                 ih = intelhex_offset(region_dict[data].filename, offset=region_dict[data].start)
+             if subtype.startswith("CRCITT32"):
+-                fmt = {"CRCITT32be": ">l", "CRCITT32le": "<l"}[subtype]
++                fmt = {"CRCITT32be": ">L", "CRCITT32le": "<L"}[subtype]
+                 header.puts(start, struct.pack(fmt, zlib.crc32(ih.tobinarray())))
+             elif subtype.startswith("SHA"):
+                 if subtype == "SHA256":
