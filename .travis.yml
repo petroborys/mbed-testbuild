@@ -5,6 +5,7 @@ env:
   global:
   - TC_HOME=$HOME/tc
   - MBED_BUILD_TIMESTAMP=42
+  - BUILD_DIR=cloud_client
 matrix:
   include:
   - os: linux
@@ -19,7 +20,7 @@ before_install:
 - mbed deploy
 - "./toolchain_install.sh"
 script:
-- ". ./mbed-cloud-build.sh && cloudbuild cloud_client ${MBED_CLOUD}"
+- ". ./mbed-cloud-build.sh && cloudbuild ${BUILD_DIR} ${MBED_CLOUD}"
 cache:
   directories:
   - "${TC_HOME}"
@@ -27,13 +28,17 @@ cache:
 before_deploy:
   - printenv
   - find cloud_client/BUILD/
+  - zip -r ${BUILD_DIR}/BUILD/mbed-${MBED_CLOUD}-armgcc-${ARMGCC_VERSION}.zip cloud-1.5/BUILD/*
+  - find ${BUILD_DIR}/BUILD -type f -mindepth 2 -delete
+  - find ${BUILD_DIR}/BUILD -type d -empty -delete
 deploy:
   provider: releases
+  name: Build ${TRAVIS_JOB_NUMBER} MBED ${MBED_CLOUD} ARMGCC ${ARMGCC_VERSION}
   skip_cleanup: true
   file_glob: true
   file: cloud_client/BUILD/**/*
   api_key: ${GITHUB_TOKEN}
   on:
-    all_branches: false
-    tags: true
+    all_branches: true
+    tags: false
     condition: $TRAVIS_PULL_REQUEST == "false" && $MBED_CLOUD =~ 1.5
