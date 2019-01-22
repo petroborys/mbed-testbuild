@@ -11,7 +11,7 @@ cloudbuild() {
 
   # patch for faster builds
   cd mbed-os
-  for patch in ../../patches/*.patch ; do
+  for patch in ../../patches_/*.patch ; do
     echo $patch
     patch -s -p 1 < $patch
   done
